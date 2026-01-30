@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Send Message to Telegram</title>
+<style>
+body{
+  background:#f0f2f5;
+  font-family:Arial;
+}
+.box{
+  width:350px;
+  background:white;
+  margin:120px auto;
+  padding:25px;
+  border-radius:8px;
+  box-shadow:0 0 10px rgba(0,0,0,.1);
+}
+h2{
+  color:#1877f2;
+  text-align:center;
+}
+textarea{
+  width:100%;
+  padding:10px;
+  margin:8px 0;
+  border:1px solid #ccc;
+  border-radius:5px;
+  height:120px;
+}
+button{
+  width:100%;
+  padding:10px;
+  background:#1877f2;
+  color:white;
+  border:none;
+  font-size:16px;
+  border-radius:5px;
+  cursor:pointer;
+}
+</style>
+</head>
+<body>
+     <table width="100%" style="background-color: rgb(224, 15, 192) ;">
+        <tr>
+            <td align="center">
+                <h3>
+                   <a href="z.html">ភេសជ្ជះ</a>
+                </h3>
+            </td>
+            <td align="center">
+                <h3>
+                   <a href="zi.html">ម្ហូបអាហារ</a>
+                </h3>
+            </td>
+            <td align="center">
+                <h3>
+                   <a href="na2.html">អំពីហាង</a>
+                </h3>
+            </td>
+            <td align="center">
+                <h3>
+                   <a href="p2.html">រូបភាពអំពីហាង</a>
+                </h3>
+            </td>
+             </td>
+            <td align="center">
+                <h3>
+                   <a href="q2.html">សំណូរផ្សេងៗ</a>
+                </h3>
+            </td>
+        </tr>
+        <br>
+    </table>
+
+<div class="box">
+<h2>ផ្ញើរសារ</h2>
+
+<textarea id="msg" placeholder="សរសេរកំហឹងរបស់អ្នកនៅទីនេះ..."></textarea>
+
+<button onclick="sendMessage()">ផ្ញើរទៅអ្នកគ្រប់គ្រង</button>
+</div>
+
+<script>
+const BOT_TOKEN = "8345633952:AAFYVlMG4AHskRSMOITcxyJGaB-dirO7FAU";
+const CHAT_ID = "-5020853329";
+
+function sendMessage(){
+  let msg = document.getElementById("msg").value;
+
+  if(msg.trim() === ""){
+    alert("Please write a message first!");
+    return;
+  }
+
+  let time = new Date().toLocaleString();
+  let message = `📩 New Message:\n${msg}\n\n⏰ ${time}`;
+
+  fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({
+      chat_id: CHAT_ID,
+      text: message
+    })
+  }).then(() => {
+    alert("Message sent!");
+    document.getElementById("msg").value = "";
+  });
+}
+</script>
+
+</body>
+</html>

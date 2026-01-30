@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="km">
+<head>
+<meta charset="UTF-8">
+<title>ហាងកាហ្វេអូនផ្កាឈូក</title>
+<style>
+body {
+  background:#f0f2f5;
+  font-family:Arial;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  padding:20px;
+}
+
+h1{
+  color:#d35400;
+  text-align:center;
+}
+
+p{
+  text-align:center;
+  margin:5px 0;
+}
+
+.box{
+  width:400px;
+  max-height:500px; /* scrollable height */
+  background:white;
+  margin:20px auto;
+  padding:25px;
+  border-radius:8px;
+  box-shadow:0 0 10px rgba(0,0,0,.1);
+  overflow-y:auto;
+}
+
+.box label{
+  display:block;
+  margin-top:10px;
+  font-weight:bold;
+}
+
+.box input, .box select{
+  width:100%;
+  padding:10px;
+  margin-top:5px;
+  margin-bottom:10px;
+  border-radius:5px;
+  border:1px solid #ccc;
+}
+
+.box button{
+  width:100%;
+  padding:10px;
+  background:#1877f2;
+  color:white;
+  border:none;
+  font-size:16px;
+  border-radius:5px;
+  cursor:pointer;
+}
+
+.box button:hover{
+  background:#0f63d3;
+}
+
+#backBtn{
+  margin-top:15px;
+  width:150px;
+  padding:8px;
+  background:#888;
+  color:white;
+  border:none;
+  border-radius:5px;
+  cursor:pointer;
+}
+
+#backBtn:hover{
+  background:#555;
+}
+
+#totalPrice{
+  font-weight:bold;
+  color:#d35400;
+  text-align:center;
+  margin-top:10px;
+}
+/* ==== Background Video ==== */
+#bg-video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+
+/* ==== Body ==== */
+body {
+  background:#f0f2f5;
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  min-height: 100vh;
+  margin: 0;
+}
+
+/* ==== Header ==== */
+h1{
+  color:#d35400;
+  text-align:center;
+  margin-top: 20px;
+}
+
+/* ==== Form Box ==== */
+.box{
+  width: 400px;
+  max-height: 450px;
+  background: white;
+  margin: 20px auto;
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,.1);
+  overflow-y: auto;
+  z-index: 1; /* above video */
+}
+
+/* ==== Labels & Inputs ==== */
+.box label{
+  display:block;
+  margin-top:10px;
+  font-weight:bold;
+}
+
+.box input, .box select{
+  width:100%;
+  padding:10px;
+  margin-top:5px;
+  margin-bottom:10px;
+  border-radius:5px;
+  border:1px solid #ccc;
+}
+
+/* ==== Buttons ==== */
+.box button{
+  width:100%;
+  padding:10px;
+  background:#1877f2;
+  color:white;
+  border:none;
+  font-size:16px;
+  border-radius:5px;
+  cursor:pointer;
+}
+
+.box button:hover{
+  background:#0f63d3;
+}
+
+#backBtn{
+  margin-top:15px;
+  width:150px;
+  padding:8px;
+  background:#888;
+  color:white;
+  border:none;
+  border-radius:5px;
+  cursor:pointer;
+}
+
+#backBtn:hover{
+  background:#555;
+}
+
+/* ==== Responsive ==== */
+@media (max-width: 500px){
+  .box {
+    width: 90%;
+    padding: 15px;
+  }
+  h1 { font-size: 20px; }
+}
+
+#tableNumber, #quantity {
+  font-size: 32px; /* ធំឡើងពី 14px ទៅ 18px */
+  padding: 12px;   /* កែសំរាប់ spacing ល្អ */
+}
+
+/* ឈ្មោះមុខម្ហូប (select) */
+#foodName {
+  font-size: 32px; /* ធំឡើងស្រួលមើល */
+  padding: 12px;
+}
+/* ===== ឈ្មោះអ្នកទិញ ===== */
+#customerName {
+  font-size: 32px;      /* ធំឡើងពី 14px ឬ 16px ទៅ 20px */
+  padding: 12px;        /* spacing ល្អសម្រាប់ typing */
+}
+
+/* ===== ឈ្មោះមុខម្ហូប ===== */
+#foodName {
+  font-size: 32px;      /* ធំស្រួលមើល */
+  padding: 12px;
+}
+/* Custom alert box */
+#customAlert {
+  display: none; /* ចាប់ផ្តើមលាក់ */
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #ff4d4d; /* ពណ៌ក្រហម ច្បាស់ */
+  color: white;
+  font-size: 32px;   /* អក្សរធំ */
+  padding: 15px 25px;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.3);
+  z-index: 9999;
+  text-align: center;
+}
+/* ផ្ដល់ទំហំធំសម្រាប់ select */
+#drinkName {
+  font-size: 32px;   /* ធំស្រួលមើល */
+  padding: 12px;     /* spacing ខ្នះ */
+  height: 60px;      /* កំណត់ទំហំ select box */
+}
+
+/* option ឲ្យ font ធំ */
+#drinkName option {
+  font-size: 28px;   /* ធំស្រួលមើល */
+  padding: 10px;
+}
+
+</style>
+</head>
+<body>
+<h1>ស្វាគមន៍មកកាន់ ហាងកាហ្វេអូនផ្កាឈូក</h1>
+<h1>តម្លៃក្នុង​១​មុខតែ​ 1$</h1>
+<div class="box">
+  <label>ឈ្មោះអ្នកទិញ</label>
+  <input type="text" id="customerName" placeholder="បញ្ចូលឈ្មោះអ្នកទិញ">
+
+  <label>លេខតុ</label>
+  <input type="text" id="tableNumber" placeholder="បញ្ចូលលេខតុ">
+
+  <label>ឈ្មោះភេសជ្ជៈ</label>
+<select id="drinkName">
+  <option value="">-- ជ្រើសរើស --</option>
+
+<option value="តែបៃតង">តែបៃតង</option>
+<option value="តែទឹកដោះគោ">តែទឹកដោះគោ</option>
+<option value="តែទឹកដោះគោក្រឡុក">តែទឹកដោះគោក្រឡុក</option>
+
+<option value="កាហ្វេអ៊ិចស្ព្រេសសូ">កាហ្វេអ៊ិចស្ព្រេសសូ</option>
+<option value="កាហ្វេឡាតេ">កាហ្វេឡាតេ</option>
+<option value="កាហ្វេសូកូលា">កាហ្វេសូកូលា</option>
+<option value="កាហ្វេ">កាហ្វេ</option>
+
+<option value="ទឹកផ្លែប៉ោម">ទឹកផ្លែប៉ោម</option>
+<option value="ទឹកផ្លែប៉េស">ទឹកផ្លែប៉េស</option>
+<option value="ទឹកដូង">ទឹកដូង</option>
+<option value="ទឹកក្រូច">ទឹកក្រូច</option>
+<option value="ទឹកផ្លែបឺរី">ទឹកផ្លែបឺរី</option>
+<option value="ទឹកត្របែក">ទឹកត្របែក</option>
+<option value="ទឹកខ្វិត">ទឹកខ្វិត</option>
+
+<option value="ទឹកក្រូចក្រឡុក">ទឹកក្រូចក្រឡុក</option>
+<option value="ទឹកក្រូចជូរ">ទឹកក្រូចជូរ</option>
+<option value="ទឹកចេក">ទឹកចេក</option>
+<option value="ទឹកដោះគោ">ទឹកដោះគោ</option>
+<option value="ទឹកដូងក្រឡុក">ទឹកដូងក្រឡុក</option>
+
+<option value="ទឹកប៉េសក្រឡុក">ទឹកប៉េសក្រឡុក</option>
+<option value="ទឹកក្រឡុក">ទឹកក្រឡុក</option>
+<option value="ទឹកខ្នុរ">ទឹកខ្នុរ</option>
+
+<option value="ទឹកស្វាយក្រឡុក">ទឹកស្វាយក្រឡុក</option>
+<option value="ទឹកឪឡឹក">ទឹកឪឡឹក</option>
+
+<option value="កាហ្វេខ្មៅក្រឡុក">កាហ្វេខ្មៅក្រឡុក</option>
+<option value="ទឹកចេក">ទឹកចេក</option>
+
+<option value="ការ៉េមក្ដៅ">ការ៉េមក្ដៅ</option>
+<option value="កាហ្វេទឹកកក">កាហ្វេទឹកកក</option>
+<option value="ទឹកដោះគោឆៅ">ទឹកដោះគោឆៅ</option>
+<option value="ទឹកផ្លេត្រសក់">ទឹកផ្លេត្រសក់</option>
+<option value="ទឹកប៉ោមក្រឡុក">ទឹកប៉ោមក្រឡុក</option>
+<option value="ទឹកប្លែកបឺរីក្រឡុក">ទឹកប្លែកបឺរីក្រឡុក</option>
+<option value="ទឹកទំពាំងបាយជូរ">ទឹកទំពាំងបាយជូរ</option>
+
+<option value="ទឹកផ្លែឈើស្រស់">ទឹកផ្លែឈើស្រស់</option>
+<option value="ទឹកចេកស្រស់ ">ទឹកចេកស្រស់</option>
+<option value="ទឹកដូងស្រស់">ទឹកដូងស្រស់</option>
+
+
+
+</select>
+  <label>ចំនួន</label>
+  <input type="number" id="quantity" placeholder="បញ្ចូលចំនួន" oninput="updateTotal()">
+
+  <div id="totalPrice">តម្លៃសរុប: $0</div>
+
+  <button onclick="sendOrder()"> បញ្ជាទិញឥឡូវនេះ ></button>
+</div>
+
+<script>
+// ===== Telegram Bot info =====
+const BOT_TOKEN = "8345633952:AAFYVlMG4AHskRSMOITcxyJGaB-dirO7FAU";
+const CHAT_ID = "-4943788578";
+
+function updateTotal(){
+  const qty = parseInt(document.getElementById("quantity").value) || 0;
+  const total = qty * 1; // 1$ per item
+  document.getElementById("totalPrice").innerText = `តម្លៃសរុប: $${total}`;
+}
+
+function sendOrder(){
+  const customer = document.getElementById("customerName").value.trim();
+  const table = document.getElementById("tableNumber").value.trim();
+  const drink = document.getElementById("drinkName").value.trim();
+  const qty = document.getElementById("quantity").value.trim();
+
+  if(!customer || !table || !drink || !qty){
+    alert("សូមបំពេញព័ត៌មានទាំងអស់!");
+    return;
+  }
+
+  const total = parseInt(qty) * 1; // 1$ per item
+  const time = new Date().toLocaleString();
+  const message = `☕ ការបញ្ជាទិញថ្មី!\nឈ្មោះអ្នកទិញ: ${customer}\nលេខតុ: ${table}\nឈ្មោះភេសជ្ជៈ: ${drink}\nចំនួន: ${qty}\nតម្លៃសរុប: $${total}\n⏰ ${time}`;
+
+  fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body: JSON.stringify({
+      chat_id: CHAT_ID,
+      text: message
+    })
+  }).then(()=>{
+    alert("Message sent to Telegram!");
+    document.getElementById("customerName").value="";
+    document.getElementById("tableNumber").value="";
+    document.getElementById("drinkName").value="";
+    document.getElementById("quantity").value="";
+    updateTotal();
+  }).catch(err=>{
+    alert("Failed to send message.");
+    console.error(err);
+  });
+}
+</script>
+<button onclick="location.href='zdring.html'" id="backBtn">Back</button>
+</body>
+</html>
